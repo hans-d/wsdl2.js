@@ -1,3 +1,23 @@
+## About this
+
+This is a fork from [wsdl2.js](https://github.com/holidayextras/wsdl2.js) repository with support for TLS/SSL.
+
+At this point, only PFX and PKCS12 formats are supported.
+
+For use the wsdl2.js-ssl: 
+
+- ```wsdl2.js-ssl [serviceName] [/local/path/to/wsdl] -pfx=[/local/path/to/pfx_p12] -passphrase="password"```
+
+The new options ``-pfx`` and ```-passphrase``` are optional. Are only needed for TLS/SSL.
+
+#### Where do I find it?
+Either get it from npm:
+
+- ```sudo npm install -g wsdl2.js-ssl```
+
+---
+
+# Original README from Wsdl2.js
 
 ## Introduction
 This is a NodeJS tool to consume a WSDL file and output a neat, manageable Javascript library. It is not 100% complete, but it gives us full coverage of the services we need at Holiday Extras. If it doesn't do everything you need, fork us and contribute back to the community :)

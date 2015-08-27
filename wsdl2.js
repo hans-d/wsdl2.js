@@ -78,6 +78,39 @@ var classTemplate = fs.readFileSync(__dirname+'/lib/classTemplate.js');
 var json = JSON.parse(parser.toJson(xmlWsdlDefinition));
 processWSDL(json);
 
+
+/**
+ * @summary Constant for hold the value of the command line argument for certificate file (PKCS12 or PFX format) path option.
+ * @author Ricardo Sousa - Challenge.IT
+ */
+var PFX_COMMAND_LINE_OPTION = '-pfx';
+/**
+ * @summary Constant for hold the value of the command line argument for passphrase for private key or pfx.
+ * @author Ricardo Sousa - Challenge.IT
+ */
+var PASSPHRASE_COMMAND_LINE_OPTION = "-passphrase";
+
+// Get the command line options.
+var commandLineOpts = {
+  serviceName: process.argv[2],
+  wsdlFilePath: process.argv[3],
+
+  // Fork aditional options.
+  pfx: null,
+  passphrase: null,
+  timeout: null
+};
+
+process.argv.forEach(function(arg) {
+  if(arg.indexOf(PFX_COMMAND_LINE_OPTION) !== -1)
+    commandLineOpts.pfx = arg.split('=')[1];
+  if(arg.indexOf(PASSPHRASE_COMMAND_LINE_OPTION) !== -1)
+    commandLineOpts.passphrase = arg.split('=')[1];
+}); 
+// Write the json file with command line options.
+fs.writeFile(process.cwd()+"/"+commandLineOpts.serviceName+'/commandLineOptions.json', JSON.stringify(commandLineOpts));
+
+
 function stripNamespace(t) {
   if (t.match(":")) {
     return t.split(":")[1];
